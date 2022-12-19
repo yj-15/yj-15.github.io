@@ -38,10 +38,17 @@
   - Readout Function R: Σ σ(i(h<sub>v</sub><sup>(T)</sup>, h<sub>v</sub><sup>0</sup>))⊙(j(h<sub>v</sub><sup>(T)</sup>))
     (i,j: neural network, ⊙: element wise multiplication)
 
-### Interaction Networks
+### Interaction Networks (2016)
   - Update Function U: 매 time step마다 적용되는 node level effect를 concatenate한 (h<sub>v</sub>, x<sub>v</sub>, m<sub>v</sub>)을 input으로 하는 neural network
     (x<sub>v</sub>: node v의 외부 영향을 의미하는 external vector를 의미함)
   - Message Function M: (h<sub>v</sub>, h<sub>w</sub>, e<sub>vw</sub>)를 concatenate한 neural network
   - Readout Function R: f(Σ h<sub>v</sub><sup>T</sup>)
     (f: 최종 hidden state인 h<sub>v</sub><sup>T</sup>의 sum을 input으로 하는 neural network)
     
+### Molecular Graph Convolutions (2016)
+  - 다른 MPNN과는 다르게 message passing phase에서 update되는 edge representation인 e<sub>vw</sub><sup>t</sup> 개념이 소개됨
+  - Message Function M(h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>, e<sub>vw</sub><sup>t</sup>): e<sub>vw</sub><sup>t</sup>
+  - Update Function U<sub>t</sub>(h<sub>v</sub><sup>t</sup>, m<sub>v</sub><sup>t+1</sup>): α(W1(α(W0h<sub>v</sub><sup>t</sup>), m<sub>v</sub><sup>t+1</sup>))
+    (α: RELU activation function, W1, W0: 학습된 weight matrix)
+  - edge state update e<sub>vw</sub><sup>t+1</sup>:  U<sub>t</sub><sup>'</sup>(e<sub>vw</sub><sup>t</sup>, h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>)
+  -
