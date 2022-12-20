@@ -62,7 +62,7 @@
     ![image](https://user-images.githubusercontent.com/120429536/208550902-3019837d-754b-4176-9294-f3db0e5d132a.png)
 
 ### Laplacian Based Methods (2016)
-  - Graph Laplacian: Adjacency matrix를 다양한 방법으로 변형해 그래프를 표현할 수 있게 한 행렬
+  - node의 값을 나타내는 벡터가 Laplacian matrix와 곱하면, 하나의 node와 이웃 node 값의 차이를 살펴볼 수 있음
   - 이미지에 사용되던 convolution 연산을 graph에 일반화하기 위해 Convolution Theorem 도입
   - Convolution Theorem이란 Graph domain의 convolution은 Fourier domain의 point-wise multiplication과 같다는 의미를 가짐\
     - Fourier Transform: 어떤 형태의 주파수가 signal에 어느 정도로 포함되어 있는 지 알 수 있음
