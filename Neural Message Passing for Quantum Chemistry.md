@@ -2,7 +2,7 @@
 
 ### MPNN이란?
 - GNN의 가장 기본이 되는 프레임워크로 node 이웃들의 정보를 이용해 해당 node의 상태를 업데이트하는 형태를 가지는 모든 neural network를 의미함
-- 해당 글은 node feature x<sub>v</sub>, edge feature e<sub>vw</sub>를 가지는 undirected graph G를 중점적으로 다룸
+- 해당  node feature x<sub>v</sub>, edge feature e<sub>vw</sub>를 가지는 undirected graph G를 중점적으로 다룸
 - forward pass는 message passing phase와 readout phase, 즉 2개의 phase로 이루어짐
   1) message passing phase  
      
@@ -83,3 +83,32 @@
     각 node는 이웃한 node와 본인 node의 hidden layer 값만을 이용해 계속 Update함  
     (CNN이 local feature를 사용하는 특성, weight sharing 특성과 비슷)
   - Update Function U<sub>v</sub><sup>t</sup>(h<sub>v</sub><sup>t</sup>, m<sub>v</sub><sup>t+1</sup>): ReLU(W<sup>t</sup>m<sub>v</sub><sup>t+1</sup>)
+  
+  
+  
+# 5.  MPNN Variants
+- GG-NN을 baseline으로 하여 MPNN 변형들을 탐색해보는 과정
+- 용어 및 상황 정리
+  - d: 그래프 안에서 각 node를 나타내는 hidden representation의 차원
+  - n: graph에서 node의 개수
+  - incoming message m<sub>t</sub> = m<sub>v</sub><sup>in</sup> (incoming edge) + m<sub>v</sub><sup>out</sup> (outgoing edge)
+  - undirected를 directed로 treat하므로 d 대신 2d 사용
+  - MPNN의 input: graph node를 나타내는 feature vector x<sub>v</sub>와 adjacency matrix A(size k)로 표현
+ 
+ ### Message Function
+ - A<sub>e<sub>vw</sub></sub>h<sub>w</sub><sup>t</sup>
+ - Edge Network
+    - A<sub>e<sub>vw</sub></sub>: edge vector e<sub>vw</sub>를 d * d matrix에 mapping하는 neural network
+ - Pair Message
+    - node w에서 node v로 가는 message가 hidden state인 h<sub>w</sub>와 edge e<sub>vw</sub>로만 이루어짐
+    - h<sub>v</sub>에 영향을 받지 않으므로 message function에서 variant를 아래와 같이 설정함  
+      m<sub>wv</sub> = f(h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>, e<sub>vw</sub>)
+    - 해당 message function을 directed graph에 적용 시, M<sup>in</sup>와 M<sup>out</sup>로 2개의 function이 사용됨
+
+ ### Virtual Graph Elements
+ -  message가 모델을 통해 pass되는 방법에 2가지 variation을 주어 propagation 시에 더 멀리 정보가 전달될 수 있도록 함
+    -  Data preprocessing 단계에서 연결되지 않은 node에 virtual edge를 부여
+    -  master node가 개별적인 node 차원인 d<sub>master</sub>와 internal update function GRU를 위한 개별적인 weight을 가지도록 함
+  
+ ### Readout Functions
+ - 
