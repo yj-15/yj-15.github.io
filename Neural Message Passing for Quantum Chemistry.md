@@ -31,8 +31,7 @@
     (f: neural network, W<sub>t</sub>: 학습된 readout matrix)
     
 ### Gated Graph Neural Networks(GG-NN) (2016)
-  - GGNN은 Back-propagation through time 알고리즘을 사용해 모델 매개 변수를 학습하나, 모든 node에서 반복 기능을 여러 번 실행하는 과정에서 중간 상태를 메모리에 저장해야 하므로  
-    큰 그래프에서문제가 될 수 있음
+  - GGNN은 Back-propagation through time 알고리즘을 사용해 모델 매개 변수를 학습하나, 모든 node에서 반복 기능을 여러 번 실행하는 과정에서 중간 상태를 메모리에 저장해야 하므로 큰 그래프에서 문제가 될 수 있음
   - Message Function M(h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>, e<sub>vw</sub>): A<sub>e<sub>vw</sub></sub>h<sub>w</sub><sup>t</sup>
     (A<sub>e<sub>vw</sub></sub>: 학습된 matrix)
   - Update Function U<sub>t</sub>: GRU(h<sub>v</sub><sup>t</sup>, m<sub>v</sub><sup>t+1</sup>)
