@@ -123,7 +123,7 @@
  - MPNN의 가장 큰 이슈는 scalability로 message passing 1 step에서 요구되는 연산량이 많음
  - 이를 해결하고자 d차원의 node embedding h<sub>v</sub><sup>t</sup>을 d/k 차원의 embedding으로 h<sub>v</sub><sup>t,k</sup>로 쪼갬
  - 각 k개의 copy에 message function과 update function을 각각 적용한 후 아래의 수식과 같이 모두 mix됨  
-   ![image](https://user-images.githubusercontent.com/120429536/208618279-37cdd12e-9d5a-4fb7-9188-4503a3d1252d.png)
+   ![image](https://user-images.githubusercontent.com/120429536/208618279-37cdd12e-9d5a-4fb7-9188-4503a3d1252d.png)  
    (g: 신경망이며 그래프의 모든 노드에서 공유됨)
  - 위의 수식과 같이 mix됨으로써 node permuatation에 invariance하게 되며 연산량을 높여 더 많은 hidden state가 가능해짐
 
