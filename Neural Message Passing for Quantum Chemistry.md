@@ -87,7 +87,7 @@
   
   
 # 5.  MPNN Variants
-- GG-NN을 baseline으로 하여 MPNN 변형들을 탐색해보는 과정
+- GG-NN을 baseline으로 하여 MPNN에 다양한 변형을 주어 탐색해보는 과정
 - 용어 및 상황 정리
   - d: 그래프 안에서 각 node를 나타내는 hidden representation의 차원
   - n: graph에서 node의 개수
@@ -111,4 +111,13 @@
     -  master node가 개별적인 node 차원인 d<sub>master</sub>와 internal update function GRU를 위한 개별적인 weight을 가지도록 함
   
  ### Readout Functions
- - 
+ - GG-NN의 readout function
+    - Readout Function R: Σ σ(i(h<sub>v</sub><sup>(T)</sup>, h<sub>v</sub><sup>0</sup>))⊙(j(h<sub>v</sub><sup>(T)</sup>))
+    (i,j: neural network, ⊙: element wise multiplication)
+ - set2set 모델
+    - input: projected된 tuple set을 input{(h<sub>v</sub><sup>(T)</sup>, x<sub>v</sub>)}
+    - ouput: graph level embedding q<sub>t</sub><sup>*</sup> 
+      (최종 embedding q<sub>t</sub><sup>*</sup>를 neural network에 넣어 ouput 도출)
+  
+ ### Multiple Towers
+ 
