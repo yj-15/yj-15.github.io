@@ -31,6 +31,8 @@
     (f: neural network, W<sub>t</sub>: 학습된 readout matrix)
     
 ### Gated Graph Neural Networks (2016)
+  - GGNN은 Back-propagation through time 알고리즘을 사용해 모델 매개 변수를 학습하나, 모든 node에서 반복 기능을 여러 번 실행하는 과정에서 중간 상태를 메모리에 저장해야 하므로  
+    큰 그래프에서는 문제가 될 수 있음
   - Message Function M(h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>, e<sub>vw</sub>): A<sub>e<sub>vw</sub></sub>h<sub>w</sub><sup>t</sup>
     (A<sub>e<sub>vw</sub></sub>: 학습된 matrix)
   - Update Function U<sub>t</sub>: GRU(h<sub>v</sub><sup>t</sup>, m<sub>v</sub><sup>t+1</sup>)
@@ -51,4 +53,28 @@
   - Update Function U<sub>t</sub>(h<sub>v</sub><sup>t</sup>, m<sub>v</sub><sup>t+1</sup>): α(W1(α(W0h<sub>v</sub><sup>t</sup>), m<sub>v</sub><sup>t+1</sup>))
     (α: RELU activation function, W1, W0: 학습된 weight matrix)
   - edge state update e<sub>vw</sub><sup>t+1</sup>:  U<sub>t</sub><sup>'</sup>(e<sub>vw</sub><sup>t</sup>, h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>)
-  -
+    (W<sub>i</sub>: 학습된 weight matrix)
+    
+### Deep Tensor Neural Networks (2017)
+  - Message Function ![image](https://user-images.githubusercontent.com/120429536/208550513-843225e6-80eb-487a-a05c-68e5cf6365a1.png)
+  - Update Function U<sub>t</sub>(h<sub>v</sub><sup>t</sup>, m<sub>v</sub><sup>t+1</sup>): h<sub>v</sub><sup>t</sup> + m<sub>v</sub><sup>t+1</sup>
+  - Readout Function R: 단층 hidden neural network를 통해 각 node를 독립적으로 pass하며 합하여 output 도출  
+    ![image](https://user-images.githubusercontent.com/120429536/208550902-3019837d-754b-4176-9294-f3db0e5d132a.png)
+
+### Laplacian Based Methods (2016)
+  - Graph Laplacian: Adjacency matrix를 다양한 방법으로 변형해 그래프를 표현할 수 있게 한 행렬
+  - 이미지에 사용되던 convolution 연산을 일반화함
+  #### Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering (ChebNet)
+  - Spatial Convolution이 아닌 Spectral Convolution을 사용
+    Spatial Convolution은 고정된 이웃 node에서만 정보를 받아 node의 정보를 update하지만, graph에서는 node간 message passing을 통해 멀리 연결되어 있는 node의 정보도               밀려 들어올 수 있도록 하는 것이 필요함  
+    Spectral Convolution: 한 node 내에 혼재된 여러 node의 신호를 여러 개의 요소로 나누어 node의 특징을 더 잘 추출할 수 있도록 하기 위해 spectral 영역에서 convolution을 수행 
+  - Message Function M(h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>): C<sub>vw</sub><sup>t</sup>h<sub>w</sub><sup>t</sup>
+    (C: graph laplacian L의 eigenvector에 의해 매개변수화되었으며 모델의 학습된 parameter)
+  - Update Function U<sub>v</sub><sup>t</sup>(h<sub>v</sub><sup>t</sup>, m<sub>v</sub><sup>t+1</sup>): σ(m<sub>v</sub><sup>t+1</sup>)
+    (σ: ReLU와 같은 non-linear activation function)
+  #### Semi-Supervised classfication with graph convolutional networks (GCN)
+  - 
+  - Message Function M<sub>t</sub(h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>): c<sub>vw</sub>h<sub>w</sub><sup>t</sup>
+  - 이 때, c<sub>vw</sub> = (deg(v)deg(w))<sup>−1/2</sup>A<sub>vw</sub>이며 이는 서로 노드가 연결되어 있거나 행과 열이 같을 때에만 값이 있고 나머지는 0인 행렬로 이를 통해  
+    각 node는 이웃한 node와 본인 node의 hidden layer 값만을 이용해 계속 Update함(CNN이 local feature를 사용하는 특성, weight sharing 특성과 비슷)
+  - Update Function U<sub>v</sub><sup>t</sup>(h<sub>v</sub><sup>t</sup>, m<sub>v</sub><sup>t+1</sup>): ReLU(W<sup>t</sup>m<sub>v</sub><sup>t+1</sup>)
