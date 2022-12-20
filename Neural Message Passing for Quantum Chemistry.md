@@ -78,7 +78,7 @@
     (σ: ReLU와 같은 non-linear activation function)
     
   #### Semi-Supervised classfication with graph convolutional networks (GCN)
-  - 
+  - central node에서 관계가 1만큼 차이가 나는 이웃 node간의 관계를 담은 후, 해당 과정을 layer로 표현한 것이 GCN
   - Message Function M<sub>t</sub>(h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>): c<sub>vw</sub>h<sub>w</sub><sup>t</sup>
   - 이 때, c<sub>vw</sub> = (deg(v)deg(w))<sup>−1/2</sup>A<sub>vw</sub>이며 이는 서로 노드가 연결되어 있거나 행과 열이 같을 때에만 값이 있고 나머지는 0인 행렬로 이를 통해  
     각 node는 이웃한 node와 본인 node의 hidden layer 값만을 이용해 계속 Update함  
