@@ -71,7 +71,7 @@
   #### Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering (ChebNet)
   - Spatial Convolution이 아닌 Spectral Convolution을 사용  
     - Spatial Convolution: 고정된 이웃 node에서만 정보를 받아 node의 정보를 update하지만, graph에서는 node간 message passing을 통해 멀리 연결되어 있는 node의 정보도                 밀려 들어올 수 있도록 하는 것이 필요함  
-    - Spectral Convolution: 한 node 내에 혼재된 여러 node의 신호를 여러 개의 요소로 나누어 node의 특징을 더 잘 추출할 수 있도록 하기 위해 spectral 영역에서 convolution을 수행
+    - Spectral Convolution: 한 node 내에 혼재된 여러 node의 feature를 여러 개의 요소로 나누어 node의 특징을 더 잘 추출하기 위해 spectral 영역에서 convolution을 수행
   - Message Function M(h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>): C<sub>vw</sub><sup>t</sup>h<sub>w</sub><sup>t</sup>
     (C: graph laplacian L의 eigenvector에 의해 매개변수화되었으며 모델의 학습된 parameter)
   - Update Function U<sub>v</sub><sup>t</sup>(h<sub>v</sub><sup>t</sup>, m<sub>v</sub><sup>t+1</sup>): σ(m<sub>v</sub><sup>t+1</sup>)
