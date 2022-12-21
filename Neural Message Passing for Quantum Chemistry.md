@@ -31,7 +31,9 @@
     (f: neural network, W<sub>t</sub>: 학습된 readout matrix)
     
 ### Gated Graph Neural Networks(GG-NN) (2016)
-  - GGNN은 Back-propagation through time 알고리즘을 사용해 모델 매개 변수를 학습하나, 모든 node에서 반복 기능을 여러 번 실행하는 과정에서 중간 상태를 메모리에 저장해야 하므로 큰 그래프에서 문제가 될 수 있음
+  - GGNN은 GNN이 propagate할수록 정보 손실 문제를 발생하는 점을 해결하기 위해 GNN에 GRU를 도입한 모델임 
+  - 이는 Back-propagation through time 알고리즘을 사용해 모델 매개 변수를 학습하나, 
+    모든 node에서 이를 반복 실행하는 과정에서 중간 상태를 메모리에 저장해야 하므로 그래프가 큰 경우에 문제가 될 수 있음
   - Message Function M(h<sub>v</sub><sup>t</sup>, h<sub>w</sub><sup>t</sup>, e<sub>vw</sub>): A<sub>e<sub>vw</sub></sub>h<sub>w</sub><sup>t</sup>
     (A<sub>e<sub>vw</sub></sub>: 학습된 matrix)
   - Update Function U<sub>t</sub>: GRU(h<sub>v</sub><sup>t</sup>, m<sub>v</sub><sup>t+1</sup>)
@@ -134,7 +136,7 @@
    (error ratio가 1%보다 낮은 경우에 해당 target에서 chemical accuracy를 달성한다고 판단)
  - 각 target에 개별적으로 모델을 개별적으로 train한 것이 40%의 모델 향상을 가져옴
  - edge network message function, set2set readout function을 사용한 모델(enn-s2s)이 MPNN variant 중 가장 높은 성능을 보임
- - graph의 input representation에서는 bond type, spatial distance 등 edge feature vector를 포함하고 수소 원자들을 명백한 node로 처리하는 것이 중요함
+ - graph의 input representation에서는 bond type, spatial distance 등 edge feature vector를 포함하고 수소 원자들을 explicit node로 처리하는 것이 중요함
 
 ![table 2PNG](https://user-images.githubusercontent.com/120429536/208790024-540b1654-e096-4c9c-8497-d8a098592a06.PNG)
 
