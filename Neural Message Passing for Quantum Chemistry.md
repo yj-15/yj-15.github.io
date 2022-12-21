@@ -158,7 +158,7 @@
     ![table 4](https://user-images.githubusercontent.com/120429536/208789841-25218fa0-0518-492d-80c4-1aed915a5159.PNG)
     
  ### Additional Experiments
- - 각기 다른 time step에서 weight를 공유하고, 더 큰 hidden dimension 차원인 d를 사용하는 것이 가장 효율적인 성능 향상 방법
+ - weight를 공유하고, 더 큰 hidden dimension 차원인 d를 사용하는 것이 가장 효율적인 성능 향상 방법
  - message function 에서는 edge network가 pair message보다 효율적임
 
 
