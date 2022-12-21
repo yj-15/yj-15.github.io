@@ -108,7 +108,7 @@
  ### Virtual Graph Elements
  -  message가 모델을 통해 pass되는 방법에 2가지 variation을 주어 propagation 시에 더 멀리 정보가 전달될 수 있도록 함
     -  Data preprocessing 단계에서 연결되지 않은 node에 virtual edge를 부여
-    -  master node가 개별적인 node 차원인 d<sub>master</sub>와 internal update function GRU를 위한 개별적인 weight을 가지도록 함
+    -  master node가 개별적인 node 차원인 d<sub>master</sub>와 internal update function GRU에서 개별적인 weight을 가질 수 있도록 함
   
  ### Readout Functions
  - GG-NN의 readout function
@@ -126,5 +126,44 @@
    ![image](https://user-images.githubusercontent.com/120429536/208618279-37cdd12e-9d5a-4fb7-9188-4503a3d1252d.png)  
    (g: 신경망이며 그래프의 모든 노드에서 공유됨)
  - 위의 수식과 같이 mix됨으로써 node permuatation에 invariance하게 되며 연산량을 높여 더 많은 hidden state가 가능해짐
+ 
+ 
+ 
+ # 8.  Results
+ - mean absolute error = error ratio * chemical accuracy  
+   (error ratio가 1%보다 낮은 경우에 해당 target에서 chemical accuracy를 달성한다고 판단)
+ - 각 target에 개별적으로 모델을 개별적으로 train한 것이 40%의 모델 향상을 가져옴
+ - edge network message function, set2set readout function을 사용한 모델(enn-s2s)이 MPNN variant 중 가장 높은 성능을 보임
+ - graph의 input representation에서는 bond type, spatial distance 등 edge feature vector를 포함하고 수소 원자들을 명백한 node로 처리하는 것이 중요함
 
+![table 2PNG](https://user-images.githubusercontent.com/120429536/208790024-540b1654-e096-4c9c-8497-d8a098592a06.PNG)
+
+ 
+ ### Training Without Spatial Information
+ - MPNN이 node 간의 상호작용을 오래 파악할수록 더 좋은 성능을 발휘함
+ - GG-NN 모델을 sparse graph, sparse graph + virtual edges, sparse graph + master node, sparse graph + set2set output 총 4가지 graph에 각각 train한 결과, 해당 변형 모두가 error ratio를 줄이는 데 효과적임
+    - 특히 set2set output이 13개 중 5개에서 chemical accuracy를 달성함
+
+   ![table 3](https://user-images.githubusercontent.com/120429536/208789906-42f8dd50-04b4-4fa8-be72-cc32c7e4a8db.PNG)
+
+
+ ### Towers
+ - Tower variant를 develop하려는 목적: training time을 줄이고, 더 큰 그래프에 train될 수 있도록 하기 위함
+ - 이에 더해 multi-tower 구조가 일반화 성능을 향상시킴을 파악함
+ - 즉, tower의 이점은 모델의 앙상블을 훈련하는 것과 유사하다는 점에 있음
+ - 그러나 tower를 edge network message function과 결합 시에는 성능이 향상되지 않았는데 이는 이와 같이 결합 시에 training이 더 어려워지기 때문임
+    
+    ![table 4](https://user-images.githubusercontent.com/120429536/208789841-25218fa0-0518-492d-80c4-1aed915a5159.PNG)
+    
+ ### Additional Experiments
+ - 각기 다른 time step에서 weight를 공유하고, 더 큰 hidden dimension 차원인 d를 사용하는 것이 가장 효율적인 성능 향상 방법
+ - edge network funciton이 pair message function보다 효율적임
+
+
+ 
+ 
+ 
+ 
+ 
+ 
     
