@@ -87,7 +87,7 @@
   
   
 # 5.  MPNN Variants
-- GG-NN을 baseline으로 하여 MPNN에 다양한 변형을 주어 탐색해보는 과정
+- GG-NN을 baseline으로 하여 MPNN에 다양한 변형을 주어 성능을 탐색해보는 과정
 - 용어 및 상황 정리
   - d: 그래프 안에서 각 node를 나타내는 hidden representation의 차원
   - n: graph에서 node의 개수
